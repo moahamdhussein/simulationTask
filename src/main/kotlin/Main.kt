@@ -15,6 +15,7 @@ var iAt :Int = 0
 var rnSt:Int = 0
 var queueTime : Int= 0
 var timeSpent :Int = 0
+var sumTimeSpent:Int = 0
 
 
 fun main(args: Array<String>) {
@@ -31,19 +32,26 @@ fun main(args: Array<String>) {
             rnSt = readln().toInt()
             queueTime = if ((clock-ableEnd)< 0) abs(clock-ableEnd) else 0
             ableBegin = if(clock > ableEnd) clock else ableEnd
+            ableIdle = ableBegin - ableEnd
             ableSt = AbleProbability(rnSt)
             ableEnd = ableBegin + ableSt
+            timeSpent = queueTime + ableSt
         }
         else{
             println("enter Baker St")
             rnSt = readln().toInt()
             queueTime = if ((clock-bakerEnd)< 0) abs(clock-bakerEnd) else 0
             bakerBegin = if(clock > bakerEnd) clock else bakerEnd
+            bakerIdle = bakerBegin - bakerEnd
             bakerSt = BakerProbability(rnSt)
             bakerEnd = bakerBegin + bakerSt
+            timeSpent = queueTime + bakerSt
         }
-        println("id\tRN-IAN\tiAt\tClock\tRN-St\tAbleBegin\tAbleST\tAbleEnd\tBakerBegin\tBakerST\tBakerEnd\tQueuingTime")
-        println("${i+1}\t\t$randomNumber\t $iAt\t  $clock\t  $rnSt\t    $ableBegin\t      $ableSt\t        $ableEnd\t\t$bakerBegin\t\t\t$bakerSt\t\t$bakerEnd\t\t\t$queueTime")
+
+        sumTimeSpent += timeSpent
+
+        println("id\tRN-IAN\tiAt\tClock\tRN-St\tAbleBegin\tAbleST\tAbleEnd\tBakerBegin\tBakerST\tBakerEnd\tQueuingTime\tTimeSpent\tAbleIdle\tBakerIdle")
+        println("${i+1}\t  $randomNumber\t $iAt\t  $clock\t\t $rnSt\t\t\t$ableBegin\t\t  $ableSt\t\t  $ableEnd\t\t\t$bakerBegin\t\t\t$bakerSt\t\t$bakerEnd\t\t\t$queueTime\t\t\t$timeSpent\t\t\t$ableIdle\t\t\t$bakerIdle")
     }
 
 
