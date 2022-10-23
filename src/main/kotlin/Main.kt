@@ -1,4 +1,5 @@
 import kotlin.math.abs
+import kotlin.math.max
 
 
 var clock: Int = 0
@@ -118,7 +119,7 @@ fun main(args: Array<String>) {
             queueTime = if ((clock - bakerEnd) < 0) abs(clock - bakerEnd) else 0
 
             //  هنا لو الوقت اللي حضر فيه العميل  الجديد اكبر من الوقت لنهاية السيرفيس للعميل القديم اذن بداية الشغل هتبقا بتساوي الوقت اللي حضر في العميل الجديد
-            bakerBegin = if (clock > bakerEnd) clock else bakerEnd
+            bakerBegin = max(clock,bakerEnd)
 
             bakerIdle = bakerBegin - bakerEnd
             bakerSt = bakerProbability(rnSt)
@@ -134,7 +135,7 @@ fun main(args: Array<String>) {
             queueTime = if ((clock - ableEnd) < 0) abs(clock - ableEnd) else 0
 
             //  هنا لو الوقت اللي حضر فيه العميل  الجديد اكبر من الوقت لنهاية السيرفيس للعميل القديم اذن بداية الشغل هتبقا بتساوي الوقت اللي حضر في العميل الجديد
-            ableBegin = if (clock > ableEnd) clock else ableEnd
+            ableBegin = max(ableEnd , clock)
 
             ableIdle = ableBegin - ableEnd
             ableSt = ableProbability(rnSt)
